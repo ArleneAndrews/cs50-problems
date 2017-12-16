@@ -1,0 +1,61 @@
+/**
+ * helpers.c
+ *
+ * Helper functions for Problem Set 3.
+ */
+ 
+#include <cs50.h>
+#include <string.h>
+
+#include "helpers.h"
+
+/**
+ * Returns true if value is in array of n values, else false.
+ */
+bool search(int value, int values[], int n)
+{
+    // TODO: implement a searching algorithm
+    
+    //check to see if n is not positive
+    if (n <= 0)
+        return false;
+    //establish new var    
+    int start = 0, last = n - 1, middle = ((start + last) / 2);
+    do
+        if ( values [middle] ==value )
+        {
+            return true;
+        }
+        else if (values [middle] > value)
+        {
+            start = ++middle;
+        }
+        else
+        {
+            last = --middle;
+        }
+    while (start <= last);
+    
+    return false;
+}
+
+/**
+ * Sorts array of n values.
+ */
+void sort(int values[], int n)
+{
+    // TODO: implement an O(n^2) sorting algorithm
+    //input n elements
+    int tmp;
+    for (int g = 0; g < n; g++)
+    {
+        for (int h=0; h < n - g - 1; h++)
+        
+        {
+            if ( values[h] > values [h + 1] )
+            tmp = values[h];
+            values [h] = values[ h + 1];
+            values [h + 1] = tmp;
+        }
+    }
+}
