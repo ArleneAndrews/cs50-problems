@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdint.h>
+#include<string.h>
+
+//file markers swiped from http://vip.sugovica.hu/Sardi/kepnezo/JPEG%20File%20Layout%20and%20Format.htm
+
+
+int main (void){
+
+   
+  FILE *recover = fopen ("card.raw", "r");
+  if (recover == NULL ){
+     fprintf(stderr,"Recovery file not readable.\n");
+     fclose (recover);
+     return 2;
+  }
+    int cont = 2;
+    int jpg = 1;
+    long dataBlock[512];
+    int checkJpg1[4] = {0xff, 0xd8, 0xff, 0xe0};
+    int checkJpg2[4] = {0xff, 0xd8, 0xff, 0xe0};
+    int check[4];
+    FILE *ans;
+    FILE *outp;
+    int dataSize = fseek(recover, 0, SEEK_END)+1;
+    rewind(recover);
+    
+    //look for jpgs
+            fread(&dataBlock, sizeof(dataBlock), 1, recover);
+            for(int i = 0;  i < 4; i++){
+                check [i] = dataBlock[i];
+            }
+            
+                if((memcmp(checkJpg1, check, 4) == 0 ) || (memcmp(checkJpg2, check, sizeof(check)) == 0)){
+                    char fileName [8];
+                    sprintf(fileName, "%03d.jpg", jpg);
+                    
+                    
+                    outp = fopen(fileName,"w");
+                    fwrite(dataBlock, sizeof(dataBlock), 1, outp);
+                    }
+                else if(dataBlock[512 ==0x00]) {
+                    fclose(outp);
+                    outp = fopen(fileName,"a");
+                    fwrite(fileName, sizeof(dataBlock), 1, outp);
+                    jpg++;
+                }
+                else{
+                fwrite(fileName, sizeof(dataBlock), 1, outp);
+                }
+                
+    free(dataBlock);
+    fclose(recover);
+  return 0;
+}
