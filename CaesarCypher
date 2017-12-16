@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+int main(int argc,string argv[])
+{
+
+//check for command-line input
+    if (argc != 2)
+    {
+       //error message if command argument missing
+        printf("Command-line argument not accepted");
+        return 1;
+    }
+
+//reduce command line number to 26 or less
+    
+    int shift, i, j, n;
+    shift= ((atoi(argv[1]))% 26);
+    
+//plaintext entry
+    printf("plaintext: ");
+    string s = get_string();
+
+//check for NULL
+    if (s != NULL){
+        
+//convert to cyphertext
+        printf("ciphertext: ");
+        for (i = 0, n = (strlen(s)); i < n; i++){
+            //lower case letter- this isn't cooperating with stringing the 2 conditions together
+            if ((s[i]>= 'a') && (s[i])<='z'){
+                    j = (s[i]);
+                
+                if ((j + shift) > 'z'){
+                  j=j-26;
+                  
+                }
+               printf("%c", (j+shift)); 
+            }
+            
+            
+            else if ((s[i]>= 'A') && (s[i]<='Z')){
+                j=(s[i]);
+            
+                if ((j + shift) > 'z')
+                {
+                  j=j-26;
+                }
+                printf("%c", (j+shift));
+            }
+            
+            
+            //other character
+            else {
+                printf("%c",s[i]);
+            }
+        }
+//exit
+    printf("\n");
+    return 0;
+    }
+}
