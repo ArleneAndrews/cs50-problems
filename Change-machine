@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+// I originally wrote this to give bills & each type of coin. Did too much work.
+int main(void)
+
+{
+    //get and validate user input
+    float c;
+    do {
+    printf("How much change? ");
+    c = get_float();
+    }
+    while (c < 0.00);
+    
+    int n, a, quart, dime, nick;
+    //use largest coin possible first & track coin count in n
+    quart = (c/.25);
+    n= quart;
+    c = (c-(quart*.25));
+    a = roundf (c * 100);
+    dime = (a/10);
+    n = n + dime;
+    a = (a -(dime*10));
+    nick = (a/5);
+    n = n + nick;
+    a = a-(nick*5);
+    n = n + a;
+    //print amount of coins and new line
+    printf("%i", n);
+    printf("\n");
+}
