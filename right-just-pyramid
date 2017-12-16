@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <cs50.h>
+
+int main(void)
+
+{
+int h, s, b, r;
+do {
+
+   printf("How many levels (1-23)? ")
+   ;
+   h = get_int();
+   }
+   
+   while (h < 0 || h > 23);
+   b=2;
+   
+   for (r=0; r < h; r++)
+    
+    {
+        for (s = h - 2;  r <= s; s--)
+        
+        {
+          printf(" ");
+        }
+        for (b = -1; b <= r; b++)
+        {
+          printf("#");
+        }
+    printf("\n");
+    }
+}
