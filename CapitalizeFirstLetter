@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+#include <ctype.h>
+
+int main(void)
+{
+//ask for users name
+    string s = get_string();
+
+
+    if (s != NULL);
+    {
+        //take first letter, and print as uppercase
+       
+       printf("%c", toupper (s[0]));
+       //print char after space as uppercase initial
+        
+        for (int i = 1, n = strlen(s); i < n; i++)
+            if ((int) (s[i-1]) == 32)
+            {
+                printf("%c", toupper(s[i]));
+            }
+    }   
+        printf("\n");
+        
+}
